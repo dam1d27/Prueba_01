@@ -3,47 +3,32 @@
   <xsl:template match="/">
     <html>
       <head>
-        <title>ejer_4</title>
+      <title>ejr 5</title>
+          <style type="text/css">    
+            .colorico {
+              color:red;
+            }
+        </style>
       </head>
       <body>
-        <table border="1">
-          <tr>
-            <th>Title</th>
-            <th>Artist</th>
-            <th>Year</th>
-          </tr>
+        <h2>CD catalog</h2>
+        <ol>
           <xsl:for-each select="//cd">
-            <xsl:choose>
-              <xsl:when test="year&lt;1980">
-                <tr bgcolor="yellow">
-                  <xsl:apply-templates select="." />
-                </tr>
-              </xsl:when>
-              <xsl:when test="year&gt;1989">
-                <tr bgcolor="blue">
-                  <xsl:apply-templates select="." />
-                </tr>
-              </xsl:when>
-              <xsl:otherwise>
-                <tr bgcolor="green">
-                  <xsl:apply-templates select="." />
-                </tr>
-              </xsl:otherwise>
-            </xsl:choose>
+            <li>
+              <div class="colorico">
+                <xsl:value-of select="title" />
+              </div>
+              <xsl:value-of select="artist" />
+              <xsl:text>, </xsl:text>
+              <xsl:value-of select="year" />
+              <br />
+              <xsl:text>$</xsl:text>
+              <xsl:value-of select="price" />
+            </li>
           </xsl:for-each>
-        </table>
+        </ol>
       </body>
     </html>
-  </xsl:template>  
-  <xsl:template match="cd">
-    <td>
-      <xsl:value-of select="title"/>
-    </td>
-    <td>
-      <xsl:value-of select="artist"/>
-    </td>
-    <td>
-      <xsl:value-of select="year"/>
-    </td>
   </xsl:template>
 </xsl:stylesheet>
+
