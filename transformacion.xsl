@@ -3,7 +3,7 @@
   <xsl:template match="/">
     <html>
       <head>
-        <title>ejer_3</title>
+        <title>ejer_4</title>
       </head>
       <body>
         <table border="1">
@@ -13,23 +13,37 @@
             <th>Year</th>
           </tr>
           <xsl:for-each select="//cd">
-            <xsl:sort select="year" />
-            <xsl:if test="year&gt;1979 and year&lt;1990">
-              <tr>
-                <td>
-                  <xsl:value-of select="title"/>
-                </td>
-                <td>
-                  <xsl:value-of select="artist"/>
-                </td>
-                <td>
-                  <xsl:value-of select="year"/>
-                </td>
-              </tr>
-            </xsl:if>
+            <xsl:choose>
+              <xsl:when test="year&lt;1980">
+                <tr bgcolor="yellow">
+                  <xsl:apply-templates select="." />
+                </tr>
+              </xsl:when>
+              <xsl:when test="year&gt;1989">
+                <tr bgcolor="blue">
+                  <xsl:apply-templates select="." />
+                </tr>
+              </xsl:when>
+              <xsl:otherwise>
+                <tr bgcolor="green">
+                  <xsl:apply-templates select="." />
+                </tr>
+              </xsl:otherwise>
+            </xsl:choose>
           </xsl:for-each>
         </table>
       </body>
     </html>
+  </xsl:template>  
+  <xsl:template match="cd">
+    <td>
+      <xsl:value-of select="title"/>
+    </td>
+    <td>
+      <xsl:value-of select="artist"/>
+    </td>
+    <td>
+      <xsl:value-of select="year"/>
+    </td>
   </xsl:template>
 </xsl:stylesheet>
